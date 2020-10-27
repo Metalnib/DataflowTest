@@ -141,7 +141,7 @@ The behavior differs in the back-pressure scenario and in case of exceptions in 
 |             | Bounded capacity reached                                     | Exception is thrown **+** back pressure                      |
 | :---------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
 | Post()      | Returns **false** immediately.To implement back-pressure a loop with sleepis needed. | Returns **true** immediately.Next Post-s will return **false**. |
-| SendAsync() | Returns a **Task** that will be **finished** whenthere is **free capacity**.If the task is awaited the back-pressureworks without loops and sleeps.Consumer async continuations are effectivelypropagated to the producer and can be awaitedin the composition root. | Returns a **failed Task.**If it's awaited the exception of the actionblock is propagated.Next SendAsync-s will return failed tasks. |
+| SendAsync() | Returns a **Task** that will be **finished** whenthere is **free capacity**.If the task is awaited the back-pressureworks without loops and sleeps.Consumer async continuations are effectivelypropagated to the producer and can be awaitedin the composition root. | Returns a **failed Task**. If it's awaited the exception of the actionblock is propagated.Next SendAsync-s will return failed tasks. |
 
 
 
@@ -149,4 +149,4 @@ As you can see from the table above the exception handling behavior is similar:
 
 When an exception is thrown in the action / transformation block the it goes into a **failed** state and **stops processing messages.**
 
-**Always handle exceptions in the data-flow blocks!**
+![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) **Always handle exceptions in the data-flow blocks!**
