@@ -1,3 +1,7 @@
+# TPL Data Flow configuration
+
+This page shows the effect of various configuration parameters on the TPL Dataflow blocks.
+
 ## Bounded Capacity and back-pressure
 
 Data-flow blocks work as tanks of liquid: if the lower tank is full the higher one will start to fill.If the lower one has infinite volume the higher tanks will not be filled ever.
@@ -147,6 +151,6 @@ The behavior differs in the back-pressure scenario and in case of exceptions in 
 
 As you can see from the table above the exception handling behavior is similar:
 
-When an exception is thrown in the action / transformation block the it goes into a **failed** state and **stops processing messages.**
+When an exception is thrown in the action / transformation block it goes into a **failed** state and **stops processing messages.**
 
 ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) **Always handle exceptions in the data-flow blocks!**
