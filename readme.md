@@ -4,13 +4,13 @@ Data-flow blocks work as tanks of liquid: if the lower tank is full the higher o
 
 To configure back-pressure we have to set the capacity of every block in a chain. If some intermediate block has less flow than lower blocks it will be the bottleneck and act as the source of back-pressure (just like a valve).
 
-![tanks](tanks.png)
+![tanks](Documentation/tanks.png)
 
 
 
 ### The test scenario
 
-![flow1](flow1.png)
+![flow1](Documentation/flow1.png)
 
 **Flow settings:**
 
@@ -26,7 +26,8 @@ If we don't limit the bounded capacity all will be buffered by the last block (a
 
 We can see that transform in queue accumulates few messages. The difference in flow is 10 - 8 =2.
 
-The in queue of the action block accumulates the most. The difference in flow is 8 - 1 = 7.![no_bounded_cap](no_bounded_cap.gif)
+The in queue of the action block accumulates the most. The difference in flow is 8 - 1 = 7.
+![no_bounded_cap](Documentation/no_bounded_cap.gif)
 
 
 
@@ -34,7 +35,7 @@ The in queue of the action block accumulates the most. The difference in flow is
 
 The in queue of the action block fills the first. When it's full the next buffer (transform out buffer) starts to fill.
 
-![action_bounded_cap](action_bounded_cap.gif)
+![action_bounded_cap](Documentation/action_bounded_cap.gif)
 
 
 
@@ -44,7 +45,7 @@ The in queue of the action block fills the first. When the action block is full 
 
 When it's also full the producer is blocked on Sending new items until some space is freed in the buffers (*back pressure*).
 
-![back_pressure](back_pressure.gif)
+![back_pressure](Documentation/back_pressure.gif)
 
 **Capacity limit of the transform block applies to any of its buffers: in and out**
 
@@ -52,13 +53,13 @@ Here we have fast action block, fast producer but slow transform.
 
 When the in-buffer is full (30) the producer is blocked.
 
-![bounded_cap_tr_in](bounded_cap_tr_in.gif)
+![bounded_cap_tr_in](Documentation/bounded_cap_tr_in.gif)
 
 
 
 ### **Test scenario 2**
 
-![flow2](flow2.png)
+![flow2](Documentation/flow2.png)
 
 The batch block is triggered by items count and by timer (Whatever happens first)
 
@@ -84,7 +85,7 @@ The batch out-buffer fills up to **4** batches (because 4 batches of 25 items = 
 
 Then, the back-pressure starts and the producer blocks.
 
-![without_timer](without_timer.gif)
+![without_timer](Documentation/without_timer.gif)
 
 
 
@@ -94,7 +95,7 @@ Timer constantly triggers the batch block to push the incomplete batch to the ou
 
 This leads to batches of **1** item instead of **25.** However, the bounded capacity of 100 items applies. When we have 100 batches of 1 item the producer is blocked.
 
-![with_timer](with_timer.gif)
+![with_timer](Documentation/with_timer.gif)
 
 ## The difference between Post() and SendAsync()
 
